@@ -137,8 +137,7 @@ export const register = (userData) => (dispatch) => {
       dispatch(getUserInfo());
     })
     .catch((error) => {
-      console.log(error)
-      dispatch(registerFailure(error.response.data.error));
+        dispatch(registerFailure(error.response.data.error));
     });
 };
 
