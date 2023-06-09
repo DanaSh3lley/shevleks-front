@@ -1,9 +1,9 @@
-import Product from "../components/Product";
 import {useParams} from "react-router-dom";
+import Product from "../components/Product";
 
-const ProductPage = ({ match }) => {
-    const { productId } = useParams();
-    return <Product productId={productId}/>
+function ProductPage() {
+  const { productId } = useParams();
+  return <Product productId={productId} />;
 }
 
-export default ProductPage
+export default ProductPage;

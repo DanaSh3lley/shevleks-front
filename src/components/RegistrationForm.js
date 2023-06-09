@@ -1,51 +1,53 @@
-import React, { useState } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { register } from "../actions/userActions";
-import { styled } from '@mui/system';
+import React, {useState} from "react";
+import {Button, TextField, Typography} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {styled} from "@mui/system";
+import {register} from "../actions/userActions";
+import LoadingComponent from "./Loading";
 
-const FormContainer = styled('form')({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '16px',
-    maxWidth: '400px',
-    margin: '0 auto',
+const FormContainer = styled("form")({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "16px",
+    maxWidth: "400px",
+    margin: "0 auto",
 });
 
 const InputField = styled(TextField)({
-    marginBottom: '16px',
+    marginBottom: "16px",
 });
 
 const ErrorText = styled(Typography)({
-    color: 'red',
-    marginBottom: '16px',
+    color: "red",
+    marginBottom: "16px",
 });
 
 const SubmitButton = styled(Button)({
-    marginTop: '16px',
-    color: 'white'
+    marginTop: "16px",
+    color: "white",
 });
 
 const Title = styled(Typography)({
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '16px',
+    fontSize: "24px",
+    fontWeight: "bold",
+    marginBottom: "16px",
 });
 
 const Description = styled(Typography)({
-    fontSize: '16px',
-    marginBottom: '16px',
+    fontSize: "16px",
+    marginBottom: "16px",
 });
 
-const RegistrationForm = () => {
+function RegistrationForm() {
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [city, setCity] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
+    const isLoading = useSelector(state => state.user.loading)
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [city, setCity] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
     const error = useSelector((state) => state.user.error);
 
     const handleSubmit = (e) => {
@@ -62,7 +64,9 @@ const RegistrationForm = () => {
         dispatch(register(userData));
     };
 
-    return (
+    return (isLoading ? (
+                <LoadingComponent/>
+            ) :
         <FormContainer onSubmit={handleSubmit}>
             {error && (
                 <ErrorText variant="body2" color="error" gutterBottom>
@@ -126,6 +130,6 @@ const RegistrationForm = () => {
             </SubmitButton>
         </FormContainer>
     );
-};
+}
 
 export default RegistrationForm;

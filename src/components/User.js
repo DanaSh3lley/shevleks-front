@@ -1,63 +1,72 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {
-    Typography,
-    TableContainer,
-    Table,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableCell,
-    Paper,
     Button,
-} from '@mui/material';
-import { styled } from '@mui/system';
-import { getOrders } from '../actions/userActions';
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
+} from "@mui/material";
+import {styled} from "@mui/system";
+import {getOrders, logout} from "../actions/userActions";
 import LoadingComponent from "./Loading";
 
-const UserInfoContainer = styled('div')({
-    marginBottom: '24px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    backgroundColor: '#F5F5F5',
-    padding: '16px',
+const UserInfoContainer = styled("div")({
+    marginBottom: "24px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    backgroundColor: "#F5F5F5",
+    padding: "16px",
 });
 
-const UserInformation = styled('div')({
-    marginBottom: '16px',
+const UserInformation = styled("div")({
+    marginBottom: "16px",
 });
 
 const UpdateLink = styled(Link)({
-    display: 'block',
-    marginBottom: '16px',
-    textDecoration: 'none',
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    display: "block",
+    marginBottom: "16px",
+    textDecoration: "none",
+    color: "#FFFFFF",
+    fontWeight: "bold",
 });
 
-const OrdersContainer = styled('div')({
-    marginLeft: '32px',
-    width: '100%'
+const OrdersContainer = styled("div")({
+    marginLeft: "32px",
+    width: "100%",
 });
 
-const UpdateButton = styled(Button)({
-    marginBottom: '16px',
-    color: 'white'
+const CustomButton = styled(Button)({
+    marginBottom: "16px",
+    color: "white",
 });
 
-const User = () => {
+function User() {
     const dispatch = useDispatch();
-    const { user, orders, loading, loadingOrders } = useSelector((state) => state.user);
+    const navigate = useNavigate();
+    const {user, orders, loading, loadingOrders} = useSelector(
+        (state) => state.user
+    );
 
     useEffect(() => {
-            dispatch(getOrders());
+        dispatch(getOrders());
     }, [dispatch]);
 
-    return (
-       (loading || loadingOrders) ? (<LoadingComponent/>) :
-        (<div style={{display: 'flex'}}>
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate('/')
+    }
+
+    return loading || loadingOrders ? (
+        <LoadingComponent/>
+    ) : (
+        <div style={{display: "flex"}}>
             <UserInfoContainer>
                 <Typography variant="h4">User Information:</Typography>
                 <UserInformation>
@@ -77,10 +86,13 @@ const User = () => {
                     <Typography>{user?.city}</Typography>
                 </UserInformation>
                 <UpdateLink to="/update">
-                    <UpdateButton variant="contained" color="primary">
+                    <CustomButton variant="contained" color="primary">
                         Update Profile
-                    </UpdateButton>
+                    </CustomButton>
                 </UpdateLink>
+                <CustomButton onClick={() => handleLogout()} variant="contained" color="error">
+                    Logout
+                </CustomButton>
             </UserInfoContainer>
 
             <OrdersContainer>
@@ -97,29 +109,28 @@ const User = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {orders.map((order) => {
-                                return (
-                                    <TableRow key={order._id}>
-                                        <TableCell>
-                                            {order.product.map((product) => (
-                                                <div key={product._id}>
-                                                    {product.product.name.uk} - {product.volume}, {product.quantity}
-                                                </div>
-                                            ))}
-                                        </TableCell>
-                                        <TableCell>{order.shippingAddress}</TableCell>
-                                        <TableCell>{order.totalPrice}</TableCell>
-                                        <TableCell>{order.status}</TableCell>
-                                        <TableCell>{order.date}</TableCell>
-                                    </TableRow>
-                                );
-                            })}
+                            {orders.map((order) => (
+                                <TableRow key={order._id}>
+                                    <TableCell>
+                                        {order.product.map((product) => (
+                                            <div key={product._id}>
+                                                {product.product.name.uk} - {product.volume},{" "}
+                                                {product.quantity}
+                                            </div>
+                                        ))}
+                                    </TableCell>
+                                    <TableCell>{order.shippingAddress}</TableCell>
+                                    <TableCell>{order.totalPrice}</TableCell>
+                                    <TableCell>{order.status}</TableCell>
+                                    <TableCell>{order.date}</TableCell>
+                                </TableRow>
+                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </OrdersContainer>
-        </div>)
+        </div>
     );
-};
+}
 
 export default User;

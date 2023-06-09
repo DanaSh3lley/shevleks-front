@@ -1,9 +1,18 @@
-import Favorite from '../components/Favorite';
-import User from "../components/User";
 import {Container} from "@mui/system";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+import User from "../components/User";
 
-const UserPage = () =>{
-    return <Container maxWidth={'xl'}><User/></Container>
+function UserPage({isAuthenticated}) {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isAuthenticated) navigate("/unauthorized");
+    }, [isAuthenticated]);
+    return (
+        <Container maxWidth="xl">
+            <User/>
+        </Container>
+    );
 }
 
-export default UserPage
+export default UserPage;

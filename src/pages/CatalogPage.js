@@ -1,7 +1,7 @@
 import Catalog from "../components/Catalog";
 
-const CatalogPage = () => {
-    return <Catalog/>
+function CatalogPage() {
+  return <Catalog />;
 }
 
-export default CatalogPage
+export default CatalogPage;

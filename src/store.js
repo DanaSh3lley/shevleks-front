@@ -1,17 +1,18 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
-import thunk from 'redux-thunk';
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
 
-import userReducer from './reducer/userReducer';
-import productReducer from './reducer/productReducer';
-import favoriteReducer from './reducer/favoriteReducer';
-import cartReducer from './reducer/cartReducer';
-import messagesReducer from './reducer/messagesReducer';
+import userReducer from "./reducer/userReducer";
+import productReducer from "./reducer/productReducer";
+import favoriteReducer from "./reducer/favoriteReducer";
+import cartReducer from "./reducer/cartReducer";
+import messagesReducer from "./reducer/messagesReducer";
 
 const rootReducer = combineReducers({
-    user: userReducer,
-    product: productReducer,
-    favorites: favoriteReducer,
-    cart: cartReducer,
+  user: userReducer,
+  product: productReducer,
+  favorites: favoriteReducer,
+  cart: cartReducer,
+  chat: messagesReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -1,17 +1,19 @@
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
-import {Container} from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Container } from "@mui/system";
 import ForgotPasswordForm from "../components/ForgotPasswordForm";
 
-const RegistrationPage = ({isAuthenticated}) => {
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (isAuthenticated)
-            navigate('/')
+function RegistrationPage({ isAuthenticated }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
 
-    }, [isAuthenticated])
-
-    return <Container><ForgotPasswordForm/></Container>
+  return (
+    <Container>
+      <ForgotPasswordForm />
+    </Container>
+  );
 }
 
-export default RegistrationPage
+export default RegistrationPage;
