@@ -39,10 +39,9 @@ const StyledRating = styled(Rating)({
 });
 
 const ProductImage = styled("img")(({theme}) => ({
-    width: "100%",
-    height: "auto",
     maxWidth: "500px",
     maxHeight: "500px",
+    minWidht: '500px',
     background: "lightblue",
     marginBottom: theme.spacing(2),
 }));
@@ -62,13 +61,11 @@ function Product({productId}) {
 
     useEffect(() => {
         dispatch(getProduct(productId));
-    }, [dispatch, productId]);
-
-    useEffect(() => {
         if (!selectedVolume) {
             setSelectedVolume(product?.price[0]?.volume)
         }
-    }, [selectedVolume, product]);
+    }, [dispatch, productId]);
+
     useEffect(() => {
         setIsFavorite(!!favorites.find((el) => el._id === product._id))
     }, [favorites, product]);
@@ -156,7 +153,7 @@ function Product({productId}) {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} md={8}>
-                    <Typography variant="h5">{product.name.uk}</Typography>
+                    <Typography marginBottom="8px" variant="h4">{product.name.uk}</Typography>
                     <Typography sx={{marginBottom: "8px"}} variant="body1">
                         {product.description.uk}
                     </Typography>
