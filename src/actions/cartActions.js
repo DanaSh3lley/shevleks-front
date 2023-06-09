@@ -164,11 +164,13 @@ export const addToCart = (productId, params) => (dispatch, getState) => {
         };
         axios
             .post(`${config[process.env.NODE_ENV].apiEndpoint}/cart/${productId}`, params, {headers})
-            .then(() => {
+            .then((response) => {
+                console.log(response)
                 dispatch(addToCartSuccess());
                 dispatch(getCart());
             })
             .catch((error) => {
+                console.log(error)
                 dispatch(addToCartError(error));
             });
     }

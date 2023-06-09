@@ -114,7 +114,7 @@ function User() {
                                     <TableCell>
                                         {order.product.map((product) => (
                                             <div key={product._id}>
-                                                {product.product.name.uk} - {product.volume},{" "}
+                                                {product.product?.name.uk || 'deleted item'} - {product.volume},{" "}
                                                 {product.quantity}
                                             </div>
                                         ))}
