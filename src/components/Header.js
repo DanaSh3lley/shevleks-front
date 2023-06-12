@@ -116,10 +116,10 @@ function Header({ isAuthenticated }) {
           ) : (
             <>
               <NavLink component={Link} to="/login" color="inherit">
-                Sign In
+                Вхід
               </NavLink>
               <NavLink component={Link} to="/signup" color="inherit">
-                Sign Up
+                Реєстрація
               </NavLink>
             </>
           )}
