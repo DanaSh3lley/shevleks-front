@@ -72,11 +72,11 @@ function PaymentForm() {
 
     return (
         <FormContainer onSubmit={handleSubmit}>
-            <Title>Payment Information</Title>
+            <Title>Оформлення замовлення</Title>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
                     <InputField
-                        label="Name"
+                        label="Ім'я"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         fullWidth
@@ -85,7 +85,7 @@ function PaymentForm() {
                 </Grid>
                 <Grid item xs={6}>
                     <InputField
-                        label="Surname"
+                        label="Прізвище"
                         value={surname}
                         onChange={(e) => setSurname(e.target.value)}
                         fullWidth
@@ -94,11 +94,9 @@ function PaymentForm() {
                 </Grid>
             </Grid>
             <Grid container spacing={2}>
-                {" "}
-                {/* Use Grid container to place fields in one row */}
                 <Grid item xs={6}>
                     <InputField
-                        label="City"
+                        label="Місто"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         fullWidth
@@ -107,7 +105,7 @@ function PaymentForm() {
                 </Grid>
                 <Grid item xs={6}>
                     <InputField
-                        label="State"
+                        label="Область"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         fullWidth
@@ -116,21 +114,21 @@ function PaymentForm() {
                 </Grid>
             </Grid>
             <InputField
-                label="Phone"
+                label="Номер телефону"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 fullWidth
                 variant="outlined"
             />
             <InputField
-                label="Address"
+                label="Адреса доставки"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 fullWidth
                 variant="outlined"
             />
             <InputField
-                label="Post"
+                label="Пошта"
                 value={post}
                 onChange={(e) => setPost(e.target.value)}
                 fullWidth
@@ -138,7 +136,7 @@ function PaymentForm() {
             />
             {formError && <Typography color="error">{formError}</Typography>}
             <SubmitButton type="submit" variant="contained" color="primary">
-                Proceed to Payment
+                Перейти до оплати
             </SubmitButton>
             <Button
                 type="button"
@@ -146,7 +144,7 @@ function PaymentForm() {
                 color="primary"
                 onClick={() => navigate("/cart")}
             >
-                Cancel
+                Назад
             </Button>
         </FormContainer>
     );

@@ -52,6 +52,12 @@ const SearchButton = styled(Button)({
   padding: "8px",
 });
 
+const PaginationContainer = styled(Grid)({
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "20px",
+});
+
 function Catalog() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.catalog);
@@ -75,25 +81,25 @@ function Catalog() {
 
   const handleApplyFilters = () => {
     dispatch(
-      getCatalog({
-        page: currentPage,
-        limit: productPerPage,
-        category: categoryFilter,
-        search: searchTerm,
-        volume: volumeFilter,
-        price: priceFilter,
-      })
+        getCatalog({
+          page: currentPage,
+          limit: productPerPage,
+          category: categoryFilter,
+          search: searchTerm,
+          volume: volumeFilter,
+          price: priceFilter,
+        })
     );
   };
 
   useEffect(() => {
     if (!isLoading) {
       dispatch(
-        getCatalog({
-          page: currentPage,
-          limit: productPerPage,
-          search: searchTerm,
-        })
+          getCatalog({
+            page: currentPage,
+            limit: productPerPage,
+            search: searchTerm,
+          })
       );
     }
   }, [dispatch, currentPage, productPerPage]);
@@ -125,104 +131,107 @@ function Catalog() {
   };
 
   return isLoading ? (
-    <LoadingComponent />
+      <LoadingComponent />
   ) : (
-    <CatalogContainer maxWidth="xl">
-      <SearchBar container alignItems="center">
-        <Grid item xs={12} sm={4} md={3}>
-          <TextField
-            fullWidth
-            label="Search"
-            variant="outlined"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <SearchButton
-            variant="outlined"
-            color="primary"
-            onClick={handleApplyFilters}
-          >
-            <Search size={36} />
-          </SearchButton>
-        </Grid>
-      </SearchBar>
-      <Grid container>
-        <FiltersContainer item xs={12} sm={4} md={3}>
-          <Typography variant="h6">Filters</Typography>
-          <Typography variant="subtitle1">Категорія</Typography>
-          <CheckboxContainer>
-            {categories.map((category) => (
-              <FormControlLabel
-                key={category._id}
-                control={
-                  <Checkbox
-                    checked={categoryFilter.includes(category._id)}
-                    onChange={handleCategoryChange}
-                    value={category._id}
+      <CatalogContainer maxWidth="xl">
+        <SearchBar container alignItems="center">
+          <Grid item xs={12} sm={4} md={3}>
+            <TextField
+                fullWidth
+                label="Пошук"
+                variant="outlined"
+                value={searchTerm}
+                onChange={handleSearchChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={4} md={3}>
+            <SearchButton
+                variant="outlined"
+                color="primary"
+                onClick={handleApplyFilters}
+            >
+              <Search size={36} />
+            </SearchButton>
+          </Grid>
+        </SearchBar>
+        <Grid container>
+          <FiltersContainer item xs={12} sm={4} md={3}>
+            <Typography variant="h6">Фільтри</Typography>
+            <Typography variant="subtitle1">Категорія</Typography>
+            <CheckboxContainer>
+              {categories.map((category) => (
+                  <FormControlLabel
+                      key={category._id}
+                      control={
+                        <Checkbox
+                            checked={categoryFilter.includes(category._id)}
+                            onChange={handleCategoryChange}
+                            value={category._id}
+                        />
+                      }
+                      label={category.name?.uk}
                   />
-                }
-                label={category.name?.uk}
-              />
-            ))}
-          </CheckboxContainer>
+              ))}
+            </CheckboxContainer>
 
-          <Typography variant="subtitle1">Ціна</Typography>
-          <Slider
-            value={priceFilter}
-            onChange={handlePriceChange}
-            valueLabelDisplay="auto"
-            min={minPrice}
-            max={maxPrice}
-            marks={[
-              { value: minPrice, label: `${minPrice} грн` },
-              { value: maxPrice, label: `${maxPrice} грн` },
-            ]}
-          />
-          <Typography variant="subtitle1">Об&apos;єм</Typography>
-          <CheckboxContainer>
-            {volumes.map((volume) => (
-              <FormControlLabel
-                key={volume}
-                control={
-                  <Checkbox
-                    checked={volumeFilter.includes(volume)}
-                    onChange={handleVolumeChange}
-                    value={volume}
+            <Typography variant="subtitle1">Ціна</Typography>
+            <Slider
+                value={priceFilter}
+                onChange={handlePriceChange}
+                valueLabelDisplay="auto"
+                min={minPrice}
+                max={maxPrice}
+                marks={[
+                  { value: minPrice, label: `${minPrice} грн` },
+                  { value: maxPrice, label: `${maxPrice} грн` },
+                ]}
+            />
+            <Typography variant="subtitle1">Об&apos;єм</Typography>
+            <CheckboxContainer>
+              {volumes.map((volume) => (
+                  <FormControlLabel
+                      key={volume}
+                      control={
+                        <Checkbox
+                            checked={volumeFilter.includes(volume)}
+                            onChange={handleVolumeChange}
+                            value={volume}
+                        />
+                      }
+                      label={volume}
                   />
-                }
-                label={volume}
-              />
-            ))}
-          </CheckboxContainer>
+              ))}
+            </CheckboxContainer>
 
-          <Button
-            variant="outlined"
-            size="large"
-            color="primary"
-            onClick={handleApplyFilters}
-          >
-            Apply Filters
-          </Button>
-        </FiltersContainer>
-        <ProductGrid item spacing={2} container xs={12} sm={8} md={9}>
-          {products.map((product) => (
-            <Grid item key={product.id} xs={6} sm={4} md={3}>
-              <ProductCard product={product} />
-            </Grid>
-          ))}
-        </ProductGrid>
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="primary"
-          showFirstButton
-          showLastButton
-        />
-      </Grid>
-    </CatalogContainer>
+            <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                sx={{marginTop: '8px'}}
+                onClick={handleApplyFilters}
+            >
+              Застосувати фільтр
+            </Button>
+          </FiltersContainer>
+          <ProductGrid item spacing={2} container xs={12} sm={8} md={9}>
+            {products.map((product) => (
+                <Grid item key={product.id} xs={6} sm={4} md={3}>
+                  <ProductCard product={product} />
+                </Grid>
+            ))}
+          </ProductGrid>
+          <PaginationContainer item xs={12}>
+            <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                showFirstButton
+                showLastButton
+            />
+          </PaginationContainer>
+        </Grid>
+      </CatalogContainer>
   );
 }
 

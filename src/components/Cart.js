@@ -84,7 +84,6 @@ function Cart() {
   };
 
   const handleGoToPayment = async () => {
-    // await dispatch(checkout())
     navigate("/payment");
   };
 
@@ -93,11 +92,11 @@ function Cart() {
   ) : (
     <CartContainer maxWidth="xl">
       <Typography variant="h4" align="center" gutterBottom>
-        Cart
+        Корзина
       </Typography>
       {cartItems?.length === 0 ? (
         <Typography variant="subtitle1" align="center">
-          Your cart is empty.
+          Ваша корзина порожня
         </Typography>
       ) : (
         <>
@@ -262,7 +261,7 @@ function Cart() {
                 color="primary"
                 onClick={handleClearCart}
               >
-                Clear Cart
+                Очистити корзину
               </Button>
               <Button
                 variant="contained"
@@ -271,7 +270,7 @@ function Cart() {
                 disabled={cartItems?.length === 0}
                 sx={{ color: "white" }}
               >
-                Go to Payment
+                Перейти до оплати
               </Button>
             </Grid>
           </Grid>

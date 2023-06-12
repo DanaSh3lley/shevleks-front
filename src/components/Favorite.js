@@ -67,8 +67,8 @@ function Favorite() {
       <Grid container>
         <ProductGrid item spacing={2} container xs={12}>
           {displayedProducts?.length === 0 ? (
-            <Typography variant="subtitle1">
-              Your favorite list is empty.
+            <Typography sx={{margin: 'auto'}} variant="subtitle1">
+              Ви поки що не додали жодного товару до улюблених.
             </Typography>
           ) : (
             displayedProducts?.map((product) => (
@@ -78,14 +78,14 @@ function Favorite() {
             ))
           )}
         </ProductGrid>
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="primary"
-          showFirstButton
-          showLastButton
-        />
+        {displayedProducts?.length !== 0 &&<Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            showFirstButton
+            showLastButton
+        />}
       </Grid>
     </FavoriteContainer>
   );

@@ -40,6 +40,7 @@ const UpdateLink = styled(Link)({
 const OrdersContainer = styled("div")({
     marginLeft: "32px",
     width: "100%",
+    marginBottom: '60px'
 });
 
 const CustomButton = styled(Button)({
@@ -68,44 +69,44 @@ function User() {
     ) : (
         <div style={{display: "flex"}}>
             <UserInfoContainer>
-                <Typography variant="h4">User Information:</Typography>
+                <Typography variant="h4">Інформація про користувача:</Typography>
                 <UserInformation>
-                    <Typography variant="subtitle1">Name:</Typography>
+                    <Typography variant="subtitle1">Ім&apos;я:</Typography>
                     <Typography>{user?.name}</Typography>
                 </UserInformation>
                 <UserInformation>
-                    <Typography variant="subtitle1">Email:</Typography>
+                    <Typography variant="subtitle1">Електронна пошта:</Typography>
                     <Typography>{user?.email}</Typography>
                 </UserInformation>
                 <UserInformation>
-                    <Typography variant="subtitle1">Phone:</Typography>
+                    <Typography variant="subtitle1">Номер:</Typography>
                     <Typography>{user?.phone}</Typography>
                 </UserInformation>
                 <UserInformation>
-                    <Typography variant="subtitle1">City:</Typography>
+                    <Typography variant="subtitle1">Місто:</Typography>
                     <Typography>{user?.city}</Typography>
                 </UserInformation>
                 <UpdateLink to="/update">
                     <CustomButton variant="contained" color="primary">
-                        Update Profile
+                        Оновити профіль
                     </CustomButton>
                 </UpdateLink>
                 <CustomButton onClick={() => handleLogout()} variant="contained" color="error">
-                    Logout
+                    Вийти з аккаунту
                 </CustomButton>
             </UserInfoContainer>
 
             <OrdersContainer>
-                <Typography variant="h4">Orders:</Typography>
+                <Typography variant="h4">Замовлення:</Typography>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Product</TableCell>
-                                <TableCell>Shipping Address</TableCell>
-                                <TableCell>Total Price</TableCell>
-                                <TableCell>Status</TableCell>
-                                <TableCell>Date</TableCell>
+                                <TableCell>Товар</TableCell>
+                                <TableCell>Адреса</TableCell>
+                                <TableCell>Ціна</TableCell>
+                                <TableCell>Статус</TableCell>
+                                <TableCell>Дата</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -122,7 +123,7 @@ function User() {
                                     <TableCell>{order.shippingAddress}</TableCell>
                                     <TableCell>{order.totalPrice}</TableCell>
                                     <TableCell>{order.status}</TableCell>
-                                    <TableCell>{order.date}</TableCell>
+                                    <TableCell>{new Date(order.date).toLocaleString('ua-uk', { timeZone: 'UTC' })}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

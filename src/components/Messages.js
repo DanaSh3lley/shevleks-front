@@ -81,7 +81,7 @@ function Messages() {
   return (
     <ChatContainer maxWidth="xl">
       <UserPanel>
-        <Typography variant="h5">Users</Typography>
+        <Typography variant="h5">Користувачі</Typography>
         <List>
           {users.map((user) => (
             <ListItem
@@ -95,11 +95,10 @@ function Messages() {
         </List>
       </UserPanel>
       <DialoguePanel>
-        <Typography variant="h5">Dialogue</Typography>
-        {selectedUser ? (
+        <Typography variant="h5">Діалог</Typography>
+          {selectedUser ? (
           <div>
             <Typography variant="h6">{selectedUser.name}</Typography>
-            {/* Render the conversation/messages for the selected user */}
             <Grid
               sx={{
                 display: "flex",
@@ -136,13 +135,13 @@ function Messages() {
                     color="primary"
                     onClick={handleSendMessage}
                 >
-                  Send
+                  Надіслати
                 </Button>
               </DialogueContainer>
             </Grid>
           </div>
         ) : (
-          <Typography>Select a user to start a conversation</Typography>
+          <Typography>Оберіть користувача</Typography>
         )}
       </DialoguePanel>
     </ChatContainer>

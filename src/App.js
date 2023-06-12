@@ -23,6 +23,7 @@ import PaymentPage from "./pages/PaymentPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentCancelPage from "./pages/PaymentCancelPage";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
+import ContactPage from "./pages/ContactsPage";
 
 function App() {
     const isAuthenticated = !!Cookies.get("token");
@@ -61,6 +62,7 @@ function App() {
                         element={<UpdateProfilePage isAuthenticated={isAuthenticated}/>}
                     />
                     <Route path="/about" element={<AboutUsPage isAuthenticated={isAuthenticated}/>}/>
+                    <Route path="/contacts" element={<ContactPage isAuthenticated={isAuthenticated}/>}/>
                     <Route path="/profile" element={<UserPage isAuthenticated={isAuthenticated}/>}/>
                     <Route path="/payment" element={<PaymentPage isAuthenticated={isAuthenticated}/>}/>
                     <Route path="/payment/success" element={<PaymentSuccessPage isAuthenticated={isAuthenticated}/>}/>
