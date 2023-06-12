@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {styled} from "@mui/system";
-import {Button, Card, CardContent, Typography} from "@mui/material";
+import {Button, Card, CardContent, Grid, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {Favorite, FavoriteFilled} from "@carbon/icons-react";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,6 @@ const CardContainer = styled(Card)({
     maxWidth: "300px",
     padding: "24px",
     display: 'grid',
-    overflow: 'hidden',
     gridAutoRows: '1fr',
     gridColumnGap: '5px',
     gridRowGap: '5px',
@@ -21,21 +20,20 @@ const CardContainer = styled(Card)({
 
 const ProductImage = styled("img")({
     height: "200px",
-    width: '200px',
-    objectFit: "cover",
     maxHeight: "200px",
+    margin: 'auto'
+});
+
+const ProductText = styled(Grid)({
+    maxHeight: '150px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    marginBottom: '8px'
 });
 
 const ProductName = styled(Typography)({
     fontWeight: "bold",
     marginBottom: "8px",
-});
-
-const ProductDescription = styled(Typography)({
-    marginBottom: "8px",
-    maxHeight: '60px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
 });
 
 const ProductVolumePrice = styled(Typography)({
@@ -107,12 +105,14 @@ function ProductCard({product}) {
     return (
         <CardContainer>
             <ProductImage
+                crossorigin="anonymous"
                 src={`${config[process.env.NODE_ENV].images}/products/${product.image}`}
                 alt={product.name.uk}
             />
             <CardContent>
-                <ProductName variant="h6">{product.name.uk}</ProductName>
-                <ProductDescription>{product.description.uk}</ProductDescription>
+                <ProductText>
+                    <ProductName variant="h6">{product.name.uk}</ProductName>
+                </ProductText>
                 {product.price.map((item) => (
                     <ProductVolumePrice key={item.volume}>
                         {item.volume} - {item.value} грн

@@ -53,7 +53,7 @@ function Product({productId}) {
     const isLoading = useSelector((state) => state.product.isLoading);
     const favorites = useSelector((state) => state.favorites.favorites);
     const error = useSelector((state) => state.product.error);
-    const [selectedVolume, setSelectedVolume] = useState(product?.price[0]?.volume);
+    const [selectedVolume, setSelectedVolume] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isInCart, setIsInCart] = useState(false);
@@ -67,8 +67,14 @@ function Product({productId}) {
     }, [dispatch, productId]);
 
     useEffect(() => {
-        setIsFavorite(!!favorites.find((el) => el._id === product._id))
+        setIsFavorite(!!favorites.find((el) => el?._id === product?._id))
     }, [favorites, product]);
+
+    useEffect(() => {
+        if (!selectedVolume) {
+            setSelectedVolume(product?.price[0]?.volume)
+        }
+    }, [selectedVolume, product]);
 
     const handleVolumeChange = (event) => {
         setSelectedVolume(event.target.value);
@@ -80,7 +86,6 @@ function Product({productId}) {
 
     const handleAddToCart = () => {
         if (user) {
-
             dispatch(addToCart(product._id, {volume: selectedVolume, quantity}));
             if (!error) {
                 setIsInCart(true);
@@ -117,14 +122,18 @@ function Product({productId}) {
         setComment(event.target.value);
     };
     const handleAddReview = async () => {
-        const reviewData = {
-            review: comment,
-            rating,
-            product: product._id,
-        };
-        await dispatch(addReview(reviewData));
-        setRating(0);
-        setComment("");
+        if (user) {
+            const reviewData = {
+                review: comment,
+                rating,
+                product: product._id,
+            };
+            await dispatch(addReview(reviewData));
+            setRating(0);
+            setComment("");
+        } else {
+            setShowModal(true);
+        }
     };
 
     const handleModalClose = () => {

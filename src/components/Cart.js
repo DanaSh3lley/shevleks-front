@@ -140,7 +140,7 @@ function Cart() {
                         {
                           item.product.price.find(
                             (p) => p.volume === item.volume
-                          ).value
+                          )?.value
                         }{" "}
                         грн
                       </Typography>

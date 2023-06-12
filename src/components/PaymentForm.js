@@ -34,13 +34,13 @@ function PaymentForm() {
     const dispatch = useDispatch();
     const paymentLink = useSelector((state) => state.cart.paymentLink);
     useSelector((state) => state.cart.isLoading);
-    const [name, setName] = useState("Blab ");
-    const [surname, setSurname] = useState("bka");
-    const [phone, setPhone] = useState("fcgvhbj");
-    const [city, setCity] = useState("rctfgvbh");
-    const [state, setState] = useState("cfgvbhjk");
-    const [address, setAddress] = useState("cfgvhbjnbgvycft");
-    const [post, setPost] = useState("fgvhbjnbhkgvybhnj");
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [phone, setPhone] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [address, setAddress] = useState("");
+    const [post, setPost] = useState("");
 
     const [formError, setFormError] = useState("");
 

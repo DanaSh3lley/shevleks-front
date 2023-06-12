@@ -11,7 +11,7 @@ const CartProductContainer = styled(CardMedia)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  background: "lightgray",
+  background: "#f5fff7",
   flexDirection: "row", // Change to row
   flexWrap: "wrap", // Allow wrapping to multiple rows
   padding: "60px",

@@ -53,6 +53,7 @@ const productReducer = (state = initialState, action) => {
     case GET_PRODUCT_REQUEST:
       return {
         ...state,
+        product: null,
         isLoading: true,
         error: null,
       };

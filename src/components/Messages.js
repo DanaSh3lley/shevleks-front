@@ -14,7 +14,7 @@ import { getMessages, sendMessage } from "../actions/messagesActions";
 const ChatContainer = styled(Container)`
   display: flex;
   gap: 20px;
-  height: 100%;
+  height: fit-content;
 `;
 
 const UserPanel = styled("div")`
@@ -24,11 +24,12 @@ const UserPanel = styled("div")`
   border-radius: 8px;
 `;
 
-const DialoguePanel = styled("div")`
+const DialoguePanel = styled(Grid)`
   flex: 1;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
+  height: fit-content;
 `;
 
 const DialogueContainer = styled(Container)({
@@ -78,7 +79,7 @@ function Messages() {
   };
 
   return (
-    <ChatContainer maxWidth="xl" spacing={4}>
+    <ChatContainer maxWidth="xl">
       <UserPanel>
         <Typography variant="h5">Users</Typography>
         <List>
@@ -121,23 +122,23 @@ function Messages() {
                       </React.Fragment>
                     ))
                   )}
+                <TextField
+                    multiline
+                    rows={4}
+                    value={message}
+                    onChange={handleMessageChange}
+                    variant="outlined"
+                    placeholder="Type your message..."
+                />
+                <Button
+                    sx={{color: 'white'}}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSendMessage}
+                >
+                  Send
+                </Button>
               </DialogueContainer>
-              <TextField
-                multiline
-                rows={4}
-                value={message}
-                onChange={handleMessageChange}
-                variant="outlined"
-                placeholder="Type your message..."
-              />
-              <Button
-                  sx={{color: 'white'}}
-                variant="contained"
-                color="primary"
-                onClick={handleSendMessage}
-              >
-                Send
-              </Button>
             </Grid>
           </div>
         ) : (
