@@ -64,7 +64,7 @@ function PaymentCart() {
       ) : (
         <>
           {cartItems.map((item) => (
-            <ProductItem item xs={12} sm={6} md={4} key={item.productId}>
+            <ProductItem item xs={12} sm={6} md={4} key={item._id}>
               <Grid container alignItems="center" spacing={2}>
                 <Grid item>
                   <ProductImage

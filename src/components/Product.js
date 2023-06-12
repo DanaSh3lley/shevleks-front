@@ -246,7 +246,7 @@ function Product({productId}) {
                 </Grid>
             </MainContent>
             <Grid item xs={12}>
-                <Typography variant="h5">Add a Review</Typography>
+                <Typography variant="h5">Додати відгук</Typography>
                 <RatingComponent value={rating} onChange={handleRatingChange}/>
                 <TextField
                     value={comment}
@@ -258,15 +258,15 @@ function Product({productId}) {
                     fullWidth
                 />
                 <Button sx={{color: 'white'}} variant="contained" color="primary" onClick={handleAddReview}>
-                    Submit Review
+                    Надіслати
                 </Button>
             </Grid>
             <Grid item xs={12}>
                 <Typography variant="h5" style={{marginBottom: "16px"}}>
-                    Product Reviews
+                    Відгуки
                 </Typography>
                 {product.reviews.length === 0 ? (
-                    <Typography>No reviews available</Typography>
+                    <Typography>Поки що відгуків немає</Typography>
                 ) : (
                     product.reviews.map((review) => (
                         <div key={review.id} style={{marginBottom: "16px"}}>

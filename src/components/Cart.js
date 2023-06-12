@@ -114,7 +114,7 @@ function Cart() {
               </TableHead>
               <TableBody>
                 {cartItems?.map((item) => (
-                  <TableRow key={item.productId}>
+                  <TableRow key={item._id}>
                     <TableCell>
                       <Grid style={{ display: "flex" }}>
                         <ProductImage

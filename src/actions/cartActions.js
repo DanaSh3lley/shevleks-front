@@ -224,6 +224,7 @@ export const checkout = (data) => (dispatch, getState) => {
                 dispatch(checkoutSuccess(response.data));
             })
             .catch((error) => {
+                console.log(error)
                 dispatch(checkoutError(error));
             });
     }
